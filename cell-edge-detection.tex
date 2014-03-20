@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{fullpage}
+\title{Efficacy of Edge Detection on Fluorescent Cell Images}
+\date{}
+\author{Jack Wearden\\Jack Jacques}
+\begin{document}
+  \maketitle
+  \section{Aim}
+
+  This investigation aims to the efficacy of 6 edge detection mechanisms in finding edges of cells in images obtained from a fluorescent microscope. The mechanisms being tested are:
+
+  \begin{itemize}
+    \itemsep1pt
+    \parskip0pt
+    \parsep0pt
+    \item Simple Gradient
+    \item Sobel Filter
+    \item Roberts Filter
+    \item First order Gaussian
+    \item Laplacian
+    \item Laplacian of Gaussian.
+  \end{itemize}
+
+  The efficacy of each mechanism will be evaluated by comparing images produced from fluorescing cells to a manually edge-detected set of images of the same source.
+
+  \section{Method}
+
+  From the three provided cell images, grayscale copies of the fluorescing cells were created, in order to allow simpler manipulation based on brightness at each point of the image, without having to consider colour. These were produced using the \texttt{rgb2gray} matlab function. The grayscale images were then convolved by the filters being tested using the \texttt{conv2} function.
+
+  This function was applied with the \texttt{valid} convolution behaviour - this means the outermost pixels in the image are disregarded, as opposed to having the image padded with 0.
+
+  As most of these filters are applied independently in the horizontal and vertical planes, it was necessary to combine these convolved results. To do this, a function to compute the combined magnitude was needed. The function used was as follows:
+
+  \begin{verbatim}
+    function m = magnitude(x,y)
+    m = sqrt(x.*x + y.*y);
+  \end{verbatim}
+
+  This computes a pythagorian value for the corresponding elements of the two matrices to create the vector for an ideal edge. This step was required for every filter with the exception of Laplacian (and Laplacian of Gaussian) as Laplacian works on both the horizontal and vertical planes.
+
+  In order to account for the earlier cropping of the cell image, it was necessary to also crop the manually edge detected images before any comparison could occur. Variants were created which cropped 1, 2 or 3 elements from each edge of the image according to the size of the filter or filters used. This is trivial to achieve in matlab - \texttt{matrix(2:end-1, 2:end-1)}, for example, crops one line of the outermost pixels from each side of the image.
+
+  \section{Results}
+
+  \section{Conclusions}
+
+\end{document}
