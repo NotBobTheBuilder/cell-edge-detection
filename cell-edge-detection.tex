@@ -55,17 +55,37 @@
 
   \section{Results}
   \begin{center}
-    \begin{tabular}{|l|l|l|l|}
+    \begin{tabular}{|l|l|l|l| l |}
       \hline
-      Sensor & Optimal Threshold & Average Sensitivity & Average Specificity\\
+      Sensor & Optimal Threshold & Image & Sensitivity & Specificity\\
       \hline
-      Simple Gradient & 10 & 0.8145 & 0.8271\\\hline
-      Roberts Filter & 7 & 0.8264 & 0.8196\\\hline
-      Sobel Filter & 25 & 0.8009 & 0.7937\\\hline
-      1st order Gaussian & 381 & 0.7169 & 0.8892\\\hline
-      Laplacian & -1 & 0.4998 & 0.4667\\\hline
-      Laplacian of Gaussian & 18 & 0.7329 & 0.7380\\\hline
+      Simple Gradient & 10 &  1 & 0.9047 & 0.8048\\
+                          &&  2 & 0.9563 & 0.7674\\
+                          &&  3 & 0.5824 & 0.9091\\
+                     && Average & 0.8145 & 0.8271\\\hline
+      Roberts Filter & 7 & 1 & 0.9122 & 0.8001\\
+                        && 2 & 0.9600 & 0.7571\\
+                        && 3 & 0.6070 & 0.9015\\
+                  && Average & 0.8264 & 0.8196\\\hline
+      Sobel Filter & 25 & 1 & 0.8504 & 0.7919\\
+                      &&  2 & 0.8983 & 0.7259\\
+                      &&  3 & 0.6541 & 0.8633\\
+                  && Average & 0.8009 & 0.7937\\\hline
+      1st order Gaussian & 381 & 1 & 0.8406 & 0.8526\\
+                              && 2 & 0.9484 & 0.8421\\
+                              && 3 & 0.3616 & 0.9730\\
+                        && Average & 0.7169 & 0.8892\\\hline
+      Laplacian & -1 & 1 & 0.4467 & 0.482\\
+                    && 2 & 0.5186 & 0.4766\\
+                    && 3 & 0.5341 & 0.4414\\
+              && Average & 0.4998 & 0.4667\\\hline
+      Laplacian of Gaussian & 18 & 1 & 0.7323 & 0.7409\\
+                                && 2 & 0.8086 & 0.7192\\
+                                && 3 & 0.6578 & 0.7538\\
+                          && Average & 0.7329 & 0.7380\\\hline
     \end{tabular}
+
+    Full data available from http://notbobthebuilder.github.io/cell-edge-detection
   \end{center}
   \section{Conclusions}
 
