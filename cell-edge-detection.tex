@@ -28,8 +28,45 @@
 
   In order to account for the earlier cropping of the cell image, it was necessary to also crop the manually edge detected images before any comparison could occur. Variants were created which cropped 1, 2 or 3 elements from each edge of the image according to the size of the filter or filters used. This is trivial to achieve in matlab - \texttt{matrix(2:end-1, 2:end-1)}, for example, crops one line of the outermost pixels from each side of the image.
 
-  \section{Results}
+  With the convolved images and correctly adjusted, the next step was to calculate the specificity and sensitivity of each sensor. To do this, a function was implemented for each, which takes a thresholded, edge detected image and the manually edge detected image and calculates the ratio.
 
+  To fairly compare the sensitivity \& specificity ratios for each detector, however, it was necessary to find the optimal threshold for each sensor. To achieve this, a batch function was created, as shown below. This function attempts a sequence of thresholds and shows the sensitivities and specificities of the detector on each image.
+
+  \small\begin{verbatim}
+    function b = batch( start, step, stop , m1, m2, m3, p1, p2, p3)
+      b = [];
+      for t=start:step:stop
+          sens = [
+              sensitivity(m1 > t, p1)
+              sensitivity(m2 > t, p2)
+              sensitivity(m3 > t, p3)
+              ];
+          specs = [
+              specificity(m1 > t, p1)
+              specificity(m2 > t, p2)
+              specificity(m3 > t, p3)
+          ];
+          b = [b; sens specs ];
+      end
+    end
+  \end{verbatim}
+
+  Using these results, it is then possible to find the optimal threshold for each value, and from that use the mean specificities and sensitivities for each detector.
+
+  \section{Results}
+  \begin{center}
+    \begin{tabular}{|l|l|l|l|}
+      \hline
+      Sensor & Optimal Threshold & Average Sensitivity & Average Specificity\\
+      \hline
+      Simple Gradient & 10 & 0.8145 & 0.8271\\\hline
+      Roberts Filter & 7 & 0.8264 & 0.8196\\\hline
+      Sobel Filter & 25 & 0.8009 & 0.7937\\\hline
+      1st order Gaussian & 381 & 0.7169 & 0.8892\\\hline
+      Laplacian & -1 & 0.4998 & 0.4667\\\hline
+      Laplacian of Gaussian & 18 & 0.7329 & 0.7380\\\hline
+    \end{tabular}
+  \end{center}
   \section{Conclusions}
 
 \end{document}
