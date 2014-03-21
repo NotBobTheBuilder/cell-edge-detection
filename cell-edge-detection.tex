@@ -87,6 +87,12 @@
 
     Full data available from http://notbobthebuilder.github.io/cell-edge-detection
   \end{center}
+
   \section{Conclusions}
+  The results of the experiment show that the first three filters - Simple, Roberts and Sobel, all perform roughly as well as each other. Gaussian Filter has a significantly higher specificity than the rest, but a much lower sensitivity. This looks as though it's due to an anomaly in the 3rd image - further experimentation would be required to see what feature of this image which causes the Gaussian filter to behave suboptimally.
+
+  Laplacian is by far the worst of the filters, actually coming worse below the line of no discrimination in ROC space. This is likely due to its sensitivity to noise, and the increased performance of the Gaussian-Laplacian filter would imply it can perform better on a noise-reduced image.
+
+  Future investigations could determine how filters perform when presented with already-processed images from other filters in the sequence, and if there is an optimal ordering - for example, a sensitive filter working on the output of a filter with a small grid size.
 
 \end{document}
